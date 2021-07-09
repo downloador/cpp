@@ -5,8 +5,9 @@ using namespace std;
 string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖabcdefghijklmnopqrstuvwxyzäåö ',#.1234567890:!?";
 string encrypted = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-int indexlen = 76;
-
+int indexlen = alphabet.size();
+// index[#] needs to be indexlen.
+// This is to set it's constant size without making a heap to the memory making it dynamic.
 char index[76] = {};
 
 bool hasUndefined() {
