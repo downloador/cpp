@@ -1,18 +1,16 @@
 #include <iostream>
-#include <Windows.h>
 #include <string>
-#include <vector>
-#include <sstream>
-
 using namespace std;
 
-string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖabcdefghijklmnopqrstuvwxyzäåö ',#.1234567890:?";
+string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÅÖabcdefghijklmnopqrstuvwxyzäåö ',#.1234567890:!?";
 string encrypted = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-char index[75] = {};
+int indexlen = 76;
+
+char index[76] = {};
 
 bool hasUndefined() {
-    for (int i = 0; i < 75; i++) {
+    for (int i = 0; i < indexlen; i++) {
         if (index[i] == '§') {
             return true;
         }
@@ -22,7 +20,7 @@ bool hasUndefined() {
 }
 
 bool isLetterSet(char value) {
-    for (int i = 0; i < 75; i++) {
+    for (int i = 0; i < indexlen; i++) {
         if (index[i] == value) {
             return true;
         }
@@ -32,7 +30,7 @@ bool isLetterSet(char value) {
 }
 
 char getPositionFromChar(char value) {
-    for (int i = 0; i < 75; i++) {
+    for (int i = 0; i < indexlen; i++) {
         if (alphabet[i] == value) {
             return index[i];
         }
@@ -42,22 +40,22 @@ char getPositionFromChar(char value) {
 }
 
 int main() {
-    for (int i = 0; i < 75; i++) { index[i] = '§'; };
+    for (int i = 0; i < indexlen; i++) { index[i] = '§'; };
 
     // 1 is true, 0 is false.
 
     srand(time(0));
 
     while (hasUndefined() == true) {
-        for (int i = 0; i < 75; i++) {
+        for (int i = 0; i < indexlen; i++) {
             char value = index[i];
             if (value != '§') continue;
 
-            int random = 0 + rand() % 75;
+            int random = 0 + rand() % 92;
             char randomLetter = encrypted[random];
 
             while (isLetterSet(randomLetter) == 1) {
-                randomLetter = encrypted[0 + rand() % 75];
+                randomLetter = encrypted[0 + rand() % 92];
             }
             index[i] = randomLetter;
         }
